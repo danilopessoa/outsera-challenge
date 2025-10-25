@@ -1,73 +1,111 @@
-# React + TypeScript + Vite
+# Outsera Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objetivo
 
-Currently, two official plugins are available:
+Desenvolver uma interface para possibilitar a leitura da lista de indicados e vencedores da categoria Pior Filme do Golden Raspberry Awards.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Visão geral
 
-## React Compiler
+Projeto criado com Vite + React + TypeScript. Contém a configuração padrão do Vite, regras de lint com ESLint + Prettier e configuração TypeScript dividida entre `tsconfig.app.json` (app) e `tsconfig.node.json` (ferramentas).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack / Tecnologias
 
-## Expanding the ESLint configuration
+- Node.js (recomendado LTS)
+- npm
+- Vite
+- React
+- TypeScript
+- ESLint + @typescript-eslint
+- Prettier
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Pré-requisitos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js instalado (recomenda-se versão LTS)
+- npm (vem com Node.js)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Verifique a versão instalada:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+node -v
+npm -v
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Instalação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Abra um terminal no diretório do projeto e instale dependências:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+## Scripts úteis
+
+Os scripts disponíveis neste projeto (conforme `package.json`) e como usá-los:
+
+- Iniciar em modo desenvolvimento (Vite):
+
+```bash
+npm run dev
+```
+
+- Fazer build para produção:
+
+```bash
+npm run build
+```
+
+- Rodar preview do build (servidor estático local):
+
+```bash
+npm run preview
+```
+
+- Checar problemas de lint com ESLint:
+
+```bash
+npm run lint
+```
+
+- Tentar corrigir automaticamente problemas de lint (opções aplicáveis):
+
+```bash
+npm run lint:fix
+```
+
+- Verificar formatação com Prettier (checagem):
+
+```bash
+npm run format:check
+```
+
+- Aplicar formatação automática com Prettier (escrever nos arquivos):
+
+```bash
+npm run format
+```
+
+> Observação: o projeto já contém um arquivo de configuração do ESLint (`.eslintrc.js`) compatível com TypeScript e React. Use `lint:fix` e `format` para resolver automaticamente muitos problemas simples.
+
+## Estrutura do projeto
+
+Principais arquivos e pastas:
+
+- `index.html` - entrada HTML do Vite
+- `src/` - código-fonte da aplicação
+  - `main.tsx` - bootstrap da aplicação
+  - `App.tsx` - componente principal de exemplo
+  - `assets/` - imagens e ativos
+- `public/` - arquivos públicos servidos diretamente
+- `vite.config.ts` - configuração do Vite
+- `tsconfig.app.json` / `tsconfig.node.json` - configurações TypeScript
+- `.eslintrc.js` - regras de lint (TypeScript + React + Prettier)
+- `package.json` - scripts e dependências
+
+## Notas sobre ESLint e Prettier
+
+Este projeto foi configurado para usar ESLint com TypeScript e React: a configuração principal está em `.eslintrc.js` e utiliza `@typescript-eslint/parser`, `plugin:@typescript-eslint/recommended`, `plugin:react/recommended`, `plugin:react-hooks/recommended` e `plugin:prettier/recommended`.
+
+Recomendações:
+
+- Instale extensões do editor (por exemplo, VS Code): `ESLint` e `Prettier` para suporte automático.
+- Habilite "Format on Save" para aplicar Prettier automaticamente.

@@ -10,7 +10,7 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-export function Sidebar({ open, onClose }: SidebarProps) {
+const Sidebar = ({ open, onClose }: SidebarProps) => {
   return (
     <>
       {/* Backdrop mobile */}
@@ -42,4 +42,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       </aside>
     </>
   );
-}
+};
+
+export { Sidebar };

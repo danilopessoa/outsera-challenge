@@ -1,15 +1,12 @@
 # Outsera Challenge
 
 ## Objetivo
-
 Desenvolver uma interface para possibilitar a leitura da lista de indicados e vencedores da categoria Pior Filme do Golden Raspberry Awards.
 
 ## Visão geral
-
 Projeto criado com Vite + React + TypeScript. Contém a configuração padrão do Vite, regras de lint com ESLint + Prettier e configuração TypeScript dividida entre `tsconfig.app.json` (app) e `tsconfig.node.json` (ferramentas).
 
 ## Stack / Tecnologias
-
 - Node.js (recomendado LTS)
 - npm
 - Vite
@@ -19,7 +16,6 @@ Projeto criado com Vite + React + TypeScript. Contém a configuração padrão d
 - Prettier
 
 ## Pré-requisitos
-
 - Node.js instalado (recomenda-se versão LTS)
 - npm (vem com Node.js)
 
@@ -106,6 +102,5 @@ Principais arquivos e pastas:
 Este projeto foi configurado para usar ESLint com TypeScript e React: a configuração principal está em `.eslintrc.js` e utiliza `@typescript-eslint/parser`, `plugin:@typescript-eslint/recommended`, `plugin:react/recommended`, `plugin:react-hooks/recommended` e `plugin:prettier/recommended`.
 
 Recomendações:
-
 - Instale extensões do editor (por exemplo, VS Code): `ESLint` e `Prettier` para suporte automático.
 - Habilite "Format on Save" para aplicar Prettier automaticamente.

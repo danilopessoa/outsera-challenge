@@ -22,9 +22,6 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
       await getListMoviesWinnersByYear(num).then((response) => {
         setWinnersByYear(Array.isArray(response) ? response : [response]);
       });
-    } else {
-      // invalid year (not an integer or out of bounds)
-      return;
     }
   };
 
@@ -45,11 +42,9 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
               id="yearInput"
               inputMode="numeric"
               pattern="\\d*"
-              placeholder="Search by year"
+              placeholder="Buscar por ano"
               className="border p-2 rounded mr-2 text-xs w-full"
               value={yearInput}
-              max={2024}
-              maxLength={4}
               onChange={(e) => {
                 const onlyDigits = e.target.value.replace(/\D+/g, "").slice(0, 4);
                 setYearInput(onlyDigits);
@@ -59,7 +54,7 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2"
-              aria-label="Search by year"
+              aria-label="Buscar por ano"
               onClick={() => {
                 handleSearch().catch(console.error);
               }}

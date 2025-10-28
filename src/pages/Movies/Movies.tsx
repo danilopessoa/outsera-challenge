@@ -11,9 +11,9 @@ const Movies: React.FC = () => {
     { header: "Título", accessor: "title" },
     { header: "Vencedor", accessor: "winner" },
   ];
-  const KEYS_TO_FILTER = [
-    { keyName: "year", placeholder: "Filtrar por ano", valueIsBoolean: false },
-    { keyName: "winner", placeholder: "Vencedor", valueIsBoolean: true },
+  const KEYS_TO_FILTER: { keyName: string; placeholder: string; type: "number" | "select" | "text" }[] = [
+    { keyName: "year", placeholder: "Filtrar por ano", type: "number" },
+    { keyName: "winner", placeholder: "Vencedor", type: "select" },
   ];
   const { movies, isLoading, getMoviesByFilter, pagination, nextPage, previousPage, goToPage } = useMovies();
 

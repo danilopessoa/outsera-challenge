@@ -98,12 +98,13 @@ describe("FilterField", () => {
   });
 
   describe("number field", () => {
-    it("renders number input with correct placeholder", () => {
+    it("renders number input with correct attributes", () => {
       render(<FilterField id="test-number" fieldType="number" onChange={mockOnChange} onClear={mockOnClear} />);
 
-      const input = screen.getByPlaceholderText("Buscar por ano");
+      const input = screen.getByRole("textbox");
       expect(input).toBeInTheDocument();
       expect(input).toHaveAttribute("inputMode", "numeric");
+      expect(input).toHaveAttribute("type", "text");
     });
 
     it("shows clear button when value is present", () => {

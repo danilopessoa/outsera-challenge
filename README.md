@@ -1,5 +1,11 @@
 # Outsera Challenge
 
+![Coverage](https://img.shields.io/badge/coverage-57.83%25-yellow)
+![Tests](https://img.shields.io/badge/tests-73%20passed-success)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
+![React](https://img.shields.io/badge/React-19.1-61dafb)
+![Vite](https://img.shields.io/badge/Vite-7.1-646cff)
+
 ## Objetivo
 
 Desenvolver uma interface para possibilitar a leitura da lista de indicados e vencedores da categoria "Pior Filme" do Golden Raspberry Awards.
@@ -82,6 +88,75 @@ npm run format
 
 ```bash
 npm run format:check
+```
+
+- Executar testes:
+
+```bash
+npm test
+```
+
+- Executar testes com cobertura:
+
+```bash
+npm run test:coverage
+```
+
+- Executar testes com UI:
+
+```bash
+npm run test:ui
+```
+
+## Testes
+
+Este projeto utiliza **Vitest** e **@testing-library/react** para testes unitários e de integração.
+
+### Executar testes
+
+```bash
+# Modo watch (recomendado para desenvolvimento)
+npm test
+
+# Executar todos os testes uma vez
+npm run test:run
+
+# Executar com UI interativa
+npm run test:ui
+
+# Executar com relatório de cobertura
+npm run test:coverage
+```
+
+### Cobertura de código
+
+A cobertura atual do projeto é:
+
+- **Statements:** 57.42%
+- **Branches:** 57.03%
+- **Functions:** 52.23%
+- **Lines:** 57.83%
+
+Componentes com 100% de cobertura:
+
+- Card, Header, Sidebar, Skeleton
+- Dashboard (página e hook)
+
+Para mais detalhes sobre cobertura, consulte [COVERAGE.md](./COVERAGE.md).
+
+### Estrutura de testes
+
+```
+src/
+  ├── tests/
+  │   ├── setup.ts           # Configuração global dos testes
+  │   ├── test-utils.tsx     # Utilitários e wrappers customizados
+  │   └── mocks/
+  │       └── api.mock.ts    # Mocks da API
+  ├── components/
+  │   └── */**.test.tsx      # Testes de componentes
+  └── pages/
+      └── */**.test.{ts,tsx} # Testes de páginas e hooks
 ```
 
 ## Estrutura do projeto
@@ -180,13 +255,3 @@ Algumas dependências usadas neste projeto:
 - lucide-react
 
 Dependências de desenvolvimento incluem: vite, typescript, eslint, prettier e plugins relacionados.
-
-## Como contribuir
-
-- Abra uma issue descrevendo o problema ou a feature desejada.
-- Crie uma branch a partir de `main` com um nome descritivo.
-- Faça commits pequenos e claros e envie um pull request.
-
-## Observações finais
-
-Este README foi atualizado para refletir a estrutura atual do projeto e os scripts disponíveis. Se desejar, posso adicionar instruções específicas para o ambiente de desenvolvimento (por exemplo: variáveis de ambiente, integração contínua ou comandos do Tailwind) — diga o que prefere.

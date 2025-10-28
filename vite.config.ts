@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import tailwindcss from "@tailwindcss/vite";
@@ -20,8 +20,28 @@ export default defineConfig({
     css: true,
     coverage: {
       provider: "v8",
-      reporter: ["text", "json", "html"],
-      exclude: ["node_modules/", "src/tests/", "**/*.config.{js,ts}", "**/*.d.ts"],
+      reporter: ["text", "json", "html", "lcov"],
+      exclude: [
+        "node_modules/",
+        "src/tests/",
+        "**/*.config.{js,ts}",
+        "**/*.d.ts",
+        "**/vite-env.d.ts",
+        "src/main.tsx",
+        "src/App.tsx",
+        "**/*.test.{ts,tsx}",
+        "**/*.spec.{ts,tsx}",
+        "src/tests/test-utils.tsx",
+        "src/tests/setup.ts",
+        "src/tests/mocks/**",
+      ],
+      include: ["src/**/*.{ts,tsx}"],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
     },
   },
 });

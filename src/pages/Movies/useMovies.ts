@@ -1,3 +1,4 @@
+// src/pages/Movies/useMovies.ts
 import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../../services/movies/movies.service.ts";
 import { useCallback, useEffect, useState } from "react";
@@ -9,8 +10,15 @@ export const useMovies = () => {
   const DEFAULT_PAGE_NUMBER = 1;
 
   const [currentPage, setCurrentPage] = useState(0);
-  const [pagination, setPagination] = useState<PaginationData>({});
-
+  const [currentFilters, setCurrentFilters] = useState<Record<string, string | number>>({});
+  const [pagination, setPagination] = useState<PaginationData>({
+    totalPages: 0,
+    totalElements: 0,
+    currentPage: 0,
+    pageSize: DEFAULT_PAGE_SIZE,
+    isFirst: true,
+    isLast: false,
+  });
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const queryMovies = useQuery({
@@ -23,10 +31,12 @@ export const useMovies = () => {
   useEffect(() => {
     if (queryMovies.data) {
       setMovies(queryMovies.data.content);
+      const apiNumber = queryMovies.data.number || 1;
+      setCurrentPage(apiNumber - 1);
       setPagination({
         totalPages: queryMovies.data.totalPages || 0,
         totalElements: queryMovies.data.totalElements || 0,
-        currentPage: (queryMovies.data.number || 1) - 1,
+        currentPage: apiNumber - 1,
         pageSize: queryMovies.data.size || DEFAULT_PAGE_SIZE,
         isFirst: queryMovies.data.first,
         isLast: queryMovies.data.last,
@@ -34,19 +44,25 @@ export const useMovies = () => {
     }
   }, [queryMovies.data]);
 
-  const getMoviesByFilter = async (filters: Record<string, string | number>) => {
-    if (filters.year) {
-      filters.year = Number(filters.year);
-    }
-    const params: GetMoviesParams = {
-      page: DEFAULT_PAGE_NUMBER,
-      size: DEFAULT_PAGE_SIZE,
-      ...filters,
-    };
+  const getMoviesByFilter = useCallback(
+    async (filters?: Record<string, string | number>, pageIndex = 0) => {
+      const appliedFilters = filters ? { ...filters } : { ...currentFilters };
+      if (appliedFilters.year) {
+        appliedFilters.year = Number(appliedFilters.year);
+      }
 
-    await getMovies(params).then((r) => {
+      // persist filters so navigation re-uses them
+      setCurrentFilters(appliedFilters);
+
+      const params: GetMoviesParams = {
+        page: pageIndex + 1,
+        size: pagination.pageSize || DEFAULT_PAGE_SIZE,
+        ...appliedFilters,
+      };
+
+      const r = await getMovies(params);
       setMovies(r.content);
-      setCurrentPage(0);
+      setCurrentPage(pageIndex);
       setPagination({
         totalPages: r.totalPages || 0,
         totalElements: r.totalElements || 0,
@@ -55,30 +71,36 @@ export const useMovies = () => {
         isFirst: r.first,
         isLast: r.last,
       });
-    });
-    return;
-  };
+    },
+    [currentFilters, pagination.pageSize],
+  );
 
-  const goToPage = useCallback((page: number) => {
-    setCurrentPage(page);
-  }, []);
+  const goToPage = useCallback(
+    (pageIndex: number) => {
+      getMoviesByFilter(undefined, pageIndex).catch(console.error);
+    },
+    [getMoviesByFilter],
+  );
 
   const nextPage = useCallback(() => {
     if (!pagination.isLast) {
-      setCurrentPage((prev) => prev + 1);
+      const nextIndex = currentPage + 1;
+      getMoviesByFilter(undefined, nextIndex).catch(console.error);
     }
-  }, [pagination.isLast]);
+  }, [pagination.isLast, currentPage, getMoviesByFilter]);
 
   const previousPage = useCallback(() => {
-    if (!pagination.isFirst) {
-      setCurrentPage((prev) => prev - 1);
+    if (!pagination.isFirst && currentPage > 0) {
+      const prevIndex = currentPage - 1;
+      getMoviesByFilter(undefined, prevIndex).catch(console.error);
     }
-  }, [pagination.isFirst]);
+  }, [pagination.isFirst, currentPage, getMoviesByFilter]);
 
   return {
     isLoading,
     movies,
     pagination,
+    currentPage,
     getMoviesByFilter,
     goToPage,
     nextPage,

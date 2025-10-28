@@ -95,7 +95,7 @@ export function DataTable<T>({
         </thead>
 
         <tbody>
-          {data.length > 0 ? (
+          {data?.length > 0 ? (
             data.map((row, idx) => (
               <tr key={idx} className="hover:bg-gray-50">
                 {columns.map((col) => (

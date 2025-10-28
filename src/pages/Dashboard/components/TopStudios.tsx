@@ -20,7 +20,7 @@ export const TopStudios = ({ studios }: TopStudiosProps) => {
   return (
     <Card
       title="Os 3 melhores estúdios com vencedores"
-      children={<DataTable columns={COLUMNS} data={studios.slice(0, 3)} />}
+      children={<DataTable columns={COLUMNS} data={studios?.slice(0, 3)} />}
     />
   );
 };

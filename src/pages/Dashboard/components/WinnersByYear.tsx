@@ -2,6 +2,7 @@ import { DataTable } from "../../../components/DataTable/DataTable.tsx";
 import { Card } from "../../../components/Card/Card.tsx";
 import { useState } from "react";
 import type { WinnersByYear } from "../../../interfaces/movies.interface.ts";
+import { Search } from "lucide-react";
 
 interface WinnersByYearProps {
   getListMoviesWinnersByYear: (year: number) => Promise<WinnersByYear | WinnersByYear[]>;
@@ -59,16 +60,7 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
                 handleSearch().catch(console.error);
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="7" strokeWidth="2" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <Search size={16} />
             </button>
           </form>
           <div className="mt-4">

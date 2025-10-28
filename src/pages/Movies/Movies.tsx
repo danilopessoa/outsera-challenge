@@ -18,7 +18,7 @@ const Movies: React.FC = () => {
   const { movies, isLoading, getMoviesByFilter, pagination, nextPage, previousPage, goToPage } = useMovies();
 
   const handleFilters = (filters: Record<string, string>) => {
-    getMoviesByFilter(filters);
+    getMoviesByFilter(filters).catch(console.error);
   };
 
   if (isLoading) {

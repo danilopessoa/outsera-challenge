@@ -47,6 +47,6 @@ export default defineConfig([
       "react-hooks/rules-of-hooks": "off",
       "react-hooks/exhaustive-deps": "warn",
       "prettier/prettier": "error",
-    }
+    },
   },
 ]);

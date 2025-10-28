@@ -1,9 +1,17 @@
 import { httpClient } from "../api";
-import type { GetMoviesParams, Movie, MoviesPage } from "../../interfaces/movies.interface";
+import type {
+  GetMoviesParams,
+  MaxMinWinIntervalForProducers,
+  Movie,
+  MoviesPage,
+  StudiosWithWinCount,
+  WinnersByYear,
+  YearsWithMultipleWinners,
+} from "../../interfaces/movies.interface";
 
 const client = httpClient();
 
-const getMovies = async (params: GetMoviesParams): Promise<Movie[]> => {
+export const getMovies = async (params: GetMoviesParams): Promise<Movie[]> => {
   const { page, size, winner, year } = params;
 
   if (!Number.isInteger(page) || page < 1) {
@@ -28,32 +36,22 @@ const getMovies = async (params: GetMoviesParams): Promise<Movie[]> => {
   return resp.content;
 };
 
-const getMovieById = async (id: string): Promise<Movie> => {
+export const getMovieById = async (id: string): Promise<Movie> => {
   return client.get<Movie>(`/movies/${id}`);
 };
 
-const getMoviesYearsWithMultipleWinners = async <T = unknown>(): Promise<T> => {
-  return client.get<T>("/movies/yearsWithMultipleWinners");
+export const getYearsWithMultipleWinners = async (): Promise<YearsWithMultipleWinners> => {
+  return client.get<YearsWithMultipleWinners>("/movies/yearsWithMultipleWinners");
 };
 
-const getWinnersByYear = async <T = unknown>(year: number): Promise<T> => {
-  if (!Number.isInteger(year)) throw new TypeError("`year` must be an integer");
-  return client.get<T>("/movies/winnersByYear", { year: String(year) });
+export const getWinnersByYear = async (year: number): Promise<WinnersByYear> => {
+  return client.get<WinnersByYear>("/movies/winnersByYear", { year: String(year) });
 };
 
-const getStudiosWithWinCount = async <T = unknown>(): Promise<T> => {
-  return client.get<T>("/movies/studiosWithWinCount");
+export const getStudiosWithWinCount = async (): Promise<StudiosWithWinCount> => {
+  return client.get<StudiosWithWinCount>("/movies/studiosWithWinCount");
 };
 
-const getMaxMinWinIntervalForProducers = async <T = unknown>(): Promise<T> => {
-  return client.get<T>("/movies/maxMinWinIntervalForProducers");
-};
-
-export {
-  getMovies,
-  getMovieById,
-  getMoviesYearsWithMultipleWinners,
-  getWinnersByYear,
-  getStudiosWithWinCount,
-  getMaxMinWinIntervalForProducers,
+export const getMaxMinWinIntervalForProducers = async (): Promise<MaxMinWinIntervalForProducers> => {
+  return client.get<MaxMinWinIntervalForProducers>("/movies/maxMinWinIntervalForProducers");
 };

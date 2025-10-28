@@ -9,8 +9,8 @@ interface Movie {
   id: number;
   year: number;
   title: string;
-  studios: string[];
-  producers: string[];
+  studios?: string[];
+  producers?: string[];
   winner: boolean;
 }
 
@@ -41,4 +41,34 @@ interface MoviesPage {
   empty: boolean;
 }
 
-export type { GetMoviesParams, Movie, MoviesPage };
+interface YearsWithMultipleWinners {
+  years: { year: number; winnerCount: number }[];
+}
+
+interface StudiosWithWinCount {
+  studios: { name: string; winCount: number }[];
+}
+
+interface WinnersByYear {
+  id: number;
+  year: number;
+  title: string;
+  studios: string[];
+  producers: string[];
+  winner: boolean;
+}
+
+interface MaxMinWinIntervalForProducers {
+  min: { producer: string; interval: number; previousWin: number; followingWin: number }[];
+  max: { producer: string; interval: number; previousWin: number; followingWin: number }[];
+}
+
+export type {
+  GetMoviesParams,
+  Movie,
+  MoviesPage,
+  YearsWithMultipleWinners,
+  StudiosWithWinCount,
+  WinnersByYear,
+  MaxMinWinIntervalForProducers,
+};

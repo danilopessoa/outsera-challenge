@@ -1,0 +1,35 @@
+import { Card } from "../../../components/Card/Card";
+import { DataTable, type Column } from "../../../components/DataTable/DataTable";
+
+interface ProducerInterval {
+  producer: string;
+  interval: number;
+  previousWin: number;
+  followingWin: number;
+}
+
+interface ProducerWinIntervalsProps {
+  min: ProducerInterval[];
+  max: ProducerInterval[];
+}
+
+const COLUMNS: Column<ProducerInterval>[] = [
+  { header: "Produtora", accessor: "producer" },
+  { header: "Intervalo", accessor: "interval" },
+  { header: "Ano anterior", accessor: "previousWin" },
+  { header: "Ano seguinte", accessor: "followingWin" },
+];
+
+export const ProducerWinIntervals = ({ min, max }: ProducerWinIntervalsProps) => {
+  return (
+    <Card
+      title="Produtores com maior intervalo entre vitórias"
+      children={
+        <div className="flex flex-col gap-2">
+          <DataTable columns={COLUMNS} data={max} title="Máximo" />
+          <DataTable columns={COLUMNS} data={min} title="Mínimo" />
+        </div>
+      }
+    />
+  );
+};

@@ -1,12 +1,15 @@
 # Outsera Challenge
 
 ## Objetivo
+
 Desenvolver uma interface para possibilitar a leitura da lista de indicados e vencedores da categoria "Pior Filme" do Golden Raspberry Awards.
 
 ## Visão geral
+
 Este projeto é uma aplicação front-end criada com Vite, React e TypeScript. Ele fornece uma interface para navegar pela lista de indicados e vencedores, com páginas para Dashboard e Filmes, componentes reutilizáveis e integração com uma API.
 
 Tecnologias principais:
+
 - React 19 + TypeScript
 - Vite
 - Tailwind CSS
@@ -16,6 +19,7 @@ Tecnologias principais:
 - ESLint + Prettier para qualidade de código
 
 ## Pré-requisitos
+
 - Node.js (recomendado: versão LTS)
 - npm (vem com o Node.js)
 
@@ -35,6 +39,7 @@ npm install
 ```
 
 ## Scripts úteis
+
 Os scripts definidos em `package.json`:
 
 - Iniciar em modo desenvolvimento (Vite):

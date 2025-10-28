@@ -35,7 +35,7 @@ export function FilterField({ id, value = "", placeholder, fieldType = "text", o
           id={id}
           inputMode="numeric"
           pattern="\\d*"
-          placeholder="Buscar por ano"
+          placeholder={placeholder}
           className="border p-2 rounded mr-2 text-xs w-full bg-white"
           value={value}
           onChange={(e) => {

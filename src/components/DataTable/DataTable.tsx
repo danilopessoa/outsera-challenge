@@ -38,12 +38,10 @@ export function DataTable<T>({
 
     setActiveFilters(updatedFilters);
 
-    // Limpa o timeout anterior
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
 
-    // Executa apenas após 500ms da última digitação
     debounceTimeout.current = setTimeout(() => {
       if (getDataByFilter) {
         getDataByFilter(updatedFilters);
@@ -54,10 +52,9 @@ export function DataTable<T>({
   const renderPagination = () => {
     if (!pagination || !onPageChange) return null;
 
-    const { currentPage, totalPages, isFirst, isLast } = pagination;
+    const { currentPage, totalPages } = pagination;
     const maxVisiblePages = 5;
 
-    // Calcula o intervalo de páginas a exibir
     const startPage = Math.floor(currentPage / maxVisiblePages) * maxVisiblePages;
     const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages - 1);
 
@@ -73,8 +70,8 @@ export function DataTable<T>({
           onClick={() => {
             onPageChange(0);
           }}
-          disabled={isFirst}
-          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          disabled={currentPage === 0}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:bg-gray-100 cursor-pointer"
           title="Primeira página"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,8 +82,8 @@ export function DataTable<T>({
         {/* Página anterior */}
         <button
           onClick={onPreviousPage}
-          disabled={isFirst}
-          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          disabled={currentPage === 0}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:bg-gray-100 cursor-pointer"
           title="Página anterior"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,8 +111,8 @@ export function DataTable<T>({
         {/* Próxima página */}
         <button
           onClick={onNextPage}
-          disabled={isLast}
-          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          disabled={currentPage === totalPages - 1}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:bg-gray-100 cursor-pointer"
           title="Próxima página"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,8 +125,8 @@ export function DataTable<T>({
           onClick={() => {
             onPageChange(totalPages - 1);
           }}
-          disabled={isLast}
-          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          disabled={currentPage === totalPages - 1}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:bg-gray-100 cursor-pointer"
           title="Última página"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,7 +152,7 @@ export function DataTable<T>({
                       <select
                         id={String(col.accessor)}
                         className="bg-white border p-2 rounded mr-2 text-xs w-full"
-                        defaultValue=""
+                        value={activeFilters[String(col.accessor)] || ""}
                         onChange={(e) => {
                           filterData(String(col.accessor), e.target.value);
                         }}
@@ -170,8 +167,9 @@ export function DataTable<T>({
                         id={String(col.accessor)}
                         placeholder={keysToFilter.find((item) => item.keyName === String(col.accessor))?.placeholder}
                         className="bg-white border p-2 rounded mr-2 text-xs w-full"
+                        value={activeFilters[String(col.accessor)] || ""}
                         onChange={(e) => {
-                          const fieldValue = e.target.value.trim();
+                          const fieldValue = e.target.value;
                           filterData(String(col.accessor), fieldValue);
                         }}
                       />

@@ -11,7 +11,7 @@ import type {
 
 const client = httpClient();
 
-export const getMovies = async (params: GetMoviesParams): Promise<Movie[]> => {
+export const getMovies = async (params: GetMoviesParams): Promise<MoviesPage> => {
   const { page, size, winner, year } = params;
 
   if (!Number.isInteger(page) || page < 1) {
@@ -32,8 +32,7 @@ export const getMovies = async (params: GetMoviesParams): Promise<Movie[]> => {
   if (typeof winner !== "undefined") queryParams.winner = String(winner);
   if (typeof year !== "undefined") queryParams.year = String(year);
 
-  const resp = await client.get<MoviesPage>("/movies", queryParams);
-  return resp.content;
+  return await client.get<MoviesPage>("/movies", queryParams);
 };
 
 export const getMovieById = async (id: string): Promise<Movie> => {

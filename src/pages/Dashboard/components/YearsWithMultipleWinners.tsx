@@ -1,5 +1,6 @@
 import { Card } from "../../../components/Card/Card";
-import { DataTable, type Column } from "../../../components/DataTable/DataTable";
+import { DataTable } from "../../../components/DataTable/DataTable";
+import type { Column } from "../../../interfaces/data-table.interface.ts";
 
 interface YearData {
   year: number;

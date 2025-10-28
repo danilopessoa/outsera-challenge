@@ -1,32 +1,143 @@
-import { useState } from "react";
-
-export interface Column<T> {
-  header: string;
-  accessor: keyof T;
-}
+import { useRef, useState } from "react";
+import type { Column, PaginationData } from "../../interfaces/data-table.interface.ts";
 
 interface DataTableProps<T> {
   columns: Column<T>[];
   data: T[];
-  title?: string;
-  pageable?: boolean;
-  keysToFilter?: { keyName: string; placeholder: string; valueIsBoolean: boolean }[];
+  title?: string | null;
+  keysToFilter?: { keyName: string; placeholder: string; valueIsBoolean: boolean }[] | null;
+  getDataByFilter?: (filters: Record<string, string>) => void;
+  pagination?: PaginationData | null;
+  onPageChange?: (page: number) => void;
+  onNextPage?: () => void;
+  onPreviousPage?: () => void;
 }
 
-export function DataTable<T>({ columns, data, title, keysToFilter, pageable = false }: DataTableProps<T>) {
-  const [dataTableInitial] = useState(data);
-  const [dataTable, setDataTable] = useState(data);
+export function DataTable<T>({
+  columns,
+  data,
+  title = null,
+  keysToFilter = null,
+  getDataByFilter = undefined,
+  pagination = null,
+  onPageChange,
+  onNextPage,
+  onPreviousPage,
+}: DataTableProps<T>) {
+  const [activeFilters, setActiveFilters] = useState<Record<string, string>>({});
+  const debounceTimeout = useRef<number | null>(null);
 
   const filterData = (keyName: string, value: string) => {
-    if (keyName.trim() === "" || value.trim() === "") {
-      setDataTable(dataTableInitial);
-      return;
+    const updatedFilters = { ...activeFilters };
+
+    if (value.trim() === "") {
+      delete updatedFilters[keyName];
+    } else {
+      updatedFilters[keyName] = value;
     }
-    const result = dataTableInitial.filter((item) => {
-      const itemValue = String(item[keyName as keyof T]).toLowerCase();
-      return itemValue.includes(value.toLowerCase());
-    });
-    setDataTable(result);
+
+    setActiveFilters(updatedFilters);
+
+    // Limpa o timeout anterior
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    // Executa apenas após 500ms da última digitação
+    debounceTimeout.current = setTimeout(() => {
+      if (getDataByFilter) {
+        getDataByFilter(updatedFilters);
+      }
+    }, 500);
+  };
+
+  const renderPagination = () => {
+    if (!pagination || !onPageChange) return null;
+
+    const { currentPage, totalPages, isFirst, isLast } = pagination;
+    const maxVisiblePages = 5;
+
+    // Calcula o intervalo de páginas a exibir
+    const startPage = Math.floor(currentPage / maxVisiblePages) * maxVisiblePages;
+    const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages - 1);
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return (
+      <div className="flex items-center gap-2">
+        {/* Primeira página */}
+        <button
+          onClick={() => {
+            onPageChange(0);
+          }}
+          disabled={isFirst}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          title="Primeira página"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Página anterior */}
+        <button
+          onClick={onPreviousPage}
+          disabled={isFirst}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          title="Página anterior"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Páginas numeradas */}
+        <div className="flex gap-1">
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => {
+                onPageChange(page);
+              }}
+              className={`px-3 py-1 border cursor-pointer rounded min-w-[2.5rem] ${
+                page === currentPage ? "bg-blue-500 text-white" : "hover:bg-gray-100"
+              }`}
+            >
+              {page + 1}
+            </button>
+          ))}
+        </div>
+
+        {/* Próxima página */}
+        <button
+          onClick={onNextPage}
+          disabled={isLast}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          title="Próxima página"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Última página */}
+        <button
+          onClick={() => {
+            onPageChange(totalPages - 1);
+          }}
+          disabled={isLast}
+          className="px-3 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+          title="Última página"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    );
   };
 
   return (
@@ -44,11 +155,12 @@ export function DataTable<T>({ columns, data, title, keysToFilter, pageable = fa
                       <select
                         id={String(col.accessor)}
                         className="bg-white border p-2 rounded mr-2 text-xs w-full"
+                        defaultValue=""
                         onChange={(e) => {
                           filterData(String(col.accessor), e.target.value);
                         }}
                       >
-                        <option selected>Escolha uma opção</option>
+                        <option value="">Escolha uma opção</option>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                       </select>
@@ -71,8 +183,8 @@ export function DataTable<T>({ columns, data, title, keysToFilter, pageable = fa
           </tr>
         </thead>
         <tbody>
-          {dataTable.length > 0 ? (
-            dataTable.map((row, idx) => (
+          {data.length > 0 ? (
+            data.map((row, idx) => (
               <tr key={idx} className="hover:bg-gray-50">
                 {columns.map((col) => (
                   <td key={String(col.accessor)} className="px-4 py-2 border-b text-sm">
@@ -90,11 +202,10 @@ export function DataTable<T>({ columns, data, title, keysToFilter, pageable = fa
           )}
         </tbody>
         <tfoot>
-          {pageable && (
+          {pagination && (
             <tr>
-              <td className="px-4 py-2 border-t text-sm" colSpan={columns.length}>
-                {/* Pagination controls would go here */}
-                Pagination Controls Placeholder
+              <td colSpan={columns.length} className="px-4 py-3 border-t">
+                <div className="flex items-center justify-center">{renderPagination()}</div>
               </td>
             </tr>
           )}

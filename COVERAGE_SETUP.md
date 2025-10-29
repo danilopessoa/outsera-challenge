@@ -68,10 +68,10 @@ coverage
 ### Cobertura Geral
 
 ```
-Statements   : 57.42%
-Branches     : 57.03%
-Functions    : 52.23%
-Lines        : 57.83%
+Statements   : 81.18%
+Branches     : 78.12%
+Functions    : 79.1%
+Lines        : 82.7%
 ```
 
 ### Componentes com 100% de Cobertura
@@ -82,6 +82,8 @@ Lines        : 57.83%
 - ✅ Skeleton
 - ✅ Dashboard (página)
 - ✅ useDashboard (hook)
+- ✅ services/movies
+- ✅ template
 
 ### Testes
 
@@ -138,36 +140,32 @@ O projeto está configurado com as seguintes metas:
 
 | Métrica    | Meta | Atual  | Status |
 | ---------- | ---- | ------ | ------ |
-| Statements | 80%  | 57.42% | 🟡     |
-| Branches   | 80%  | 57.03% | 🟡     |
-| Functions  | 80%  | 52.23% | 🟡     |
-| Lines      | 80%  | 57.83% | 🟡     |
+| Statements | 80%  | 81.18% | ✅     |
+| Branches   | 80%  | 78.12% | 🟡     |
+| Functions  | 80%  | 79.1%  | 🟡     |
+| Lines      | 80%  | 82.7%  | ✅     |
 
 ## 📈 Próximas Melhorias
 
 ### Prioridade Alta
 
-1. **DataTable** (38% → 80%)
+1. **DataTable** (53.44% → 80%)
    - Adicionar testes de paginação
    - Testar filtros
    - Testar ordenação
 
-2. **Movies Service** (28% → 80%)
-   - Testar todos os endpoints
-   - Testar error handling
-   - Testar cache
+2. **Interfaces** (0% → 80%)
+   - Cobrir arquivos de interfaces utilizados por componentes/serviços
 
 ### Prioridade Média
 
-3. **Dashboard Components** (0% → 80%)
+3. **Dashboard Components** (alguns com cobertura baixa nos subcomponentes)
    - ProducerWinIntervals
    - TopStudios
    - WinnersByYear
    - YearsWithMultipleWinners
 
-4. **Template** (0% → 80%)
-   - Testar layout
-   - Testar navegação
+4. **Template** (manter testes de layout)
 
 ## 🔧 Comandos Úteis
 
@@ -302,7 +300,7 @@ jobs:
 A configuração de coverage está completa e funcionando!
 
 - ✅ 73 testes passando
-- ✅ Coverage em 57.83%
+- ✅ Coverage em 82.7%
 - ✅ Relatórios em múltiplos formatos
 - ✅ Documentação completa
 
@@ -310,6 +308,6 @@ A configuração de coverage está completa e funcionando!
 
 ---
 
-**Data de configuração:** 2025-10-28
+**Data de configuração:** 2025-10-29
 **Versão do Vitest:** 4.0.4
 **Versão do Coverage:** @vitest/coverage-v8

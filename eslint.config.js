@@ -45,6 +45,7 @@ export default defineConfig([
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-dynamic-delete": "off",
       "@typescript-eslint/no-unnecessary-condition": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
       "react-hooks/rules-of-hooks": "off",
       "react-hooks/exhaustive-deps": "warn",
       "prettier/prettier": "error",

@@ -1,6 +1,6 @@
 # Outsera Challenge
 
-![Coverage](https://img.shields.io/badge/coverage-57.83%25-yellow)
+![Coverage](https://img.shields.io/badge/coverage-82.7%25-yellow)
 ![Tests](https://img.shields.io/badge/tests-73%20passed-success)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
 ![React](https://img.shields.io/badge/React-19.1-61dafb)
@@ -132,10 +132,10 @@ npm run test:coverage
 
 A cobertura atual do projeto é:
 
-- **Statements:** 57.42%
-- **Branches:** 57.03%
-- **Functions:** 52.23%
-- **Lines:** 57.83%
+- **Statements:** 81.18%
+- **Branches:** 78.12%
+- **Functions:** 79.1%
+- **Lines:** 82.7%
 
 Componentes com 100% de cobertura:
 

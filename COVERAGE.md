@@ -116,14 +116,3 @@ start coverage/index.html  # Windows
 ### Hooks
 - ✅ useMovies (4 testes)
 - ✅ useDashboard (10 testes)
-
-## 🚀 Próximos Passos para Melhorar Cobertura
-
-1. **DataTable Component** (53.44% → 80%)
-   - Adicionar testes para paginação
-   - Testar ordenação de colunas
-   - Testar filtros combinados
-
-2. **Interfaces** (0% → 80%)
-   - Incluir testes que validem tipos/contratos usados em runtime (quando aplicável)
-   - Cobrir arquivos de interfaces utilizados por componentes/serviços

@@ -17,5 +17,5 @@ const COLUMNS: Column<YearData>[] = [
 ];
 
 export const YearsWithMultipleWinners = ({ years }: YearsWithMultipleWinnersProps) => {
-  return <Card title="Liste os anos com mais vencedores" children={<DataTable columns={COLUMNS} data={years} />} />;
+  return <Card title="List years with multiple winners" children={<DataTable columns={COLUMNS} data={years} />} />;
 };

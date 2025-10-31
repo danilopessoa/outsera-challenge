@@ -28,7 +28,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-4">Dashboard</h2>
       <div className="grid grid-cols-2 gap-4">
         <YearsWithMultipleWinners years={years} />
         <TopStudios studios={studios} />

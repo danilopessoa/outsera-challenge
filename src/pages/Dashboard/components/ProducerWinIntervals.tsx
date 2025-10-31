@@ -24,11 +24,11 @@ const COLUMNS: Column<ProducerInterval>[] = [
 export const ProducerWinIntervals = ({ min, max }: ProducerWinIntervalsProps) => {
   return (
     <Card
-      title="Produtores com maior intervalo entre vitórias"
+      title="Producers with longest and shortest interval between wins"
       children={
         <div className="flex flex-col gap-2">
-          <DataTable columns={COLUMNS} data={max} title="Máximo" />
-          <DataTable columns={COLUMNS} data={min} title="Mínimo" />
+          <DataTable columns={COLUMNS} data={max} title="Maximum" />
+          <DataTable columns={COLUMNS} data={min} title="Minimum" />
         </div>
       }
     />

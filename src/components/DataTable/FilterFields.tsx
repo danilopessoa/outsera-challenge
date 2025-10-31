@@ -20,7 +20,7 @@ export function FilterField({ id, value = "", placeholder, fieldType = "text", o
           onChange(e.target.value);
         }}
       >
-        <option value="">Escolha uma opção</option>
+        <option value="">{placeholder || "-"}</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>

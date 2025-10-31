@@ -14,8 +14,8 @@ const client = httpClient();
 export const getMovies = async (params: GetMoviesParams): Promise<MoviesPage> => {
   const { page, size, winner, year } = params;
 
-  if (!Number.isInteger(page) || page < 1) {
-    throw new TypeError("`page` must be an integer >= 1");
+  if (!Number.isInteger(page) || page < 0) {
+    throw new TypeError("`page` must be an integer >= 0");
   }
   if (!Number.isInteger(size) || size < 1) {
     throw new TypeError("`size` must be an integer >= 1");

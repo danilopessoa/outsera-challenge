@@ -8,7 +8,6 @@ interface HeaderProps {
 const Header = ({ onMenuClick }: HeaderProps) => {
   return (
     <header className="h-14 bg-white border-b flex items-center px-4 sticky top-0 z-20">
-      {/* Mostra menu hamburguer apenas no mobile */}
       <button className="md:hidden mr-3" onClick={onMenuClick}>
         <Menu className="w-6 h-6" />
       </button>

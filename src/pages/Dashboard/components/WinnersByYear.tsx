@@ -28,7 +28,7 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
 
   return (
     <Card
-      title="Liste os vencedores dos filmes por ano"
+      title="List movie winners by year"
       children={
         <div>
           <form
@@ -36,13 +36,13 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
               e.preventDefault();
               handleSearch().catch(console.error);
             }}
+            noValidate
             className="flex items-center"
           >
             <input
               type="text"
               id="yearInput"
               inputMode="numeric"
-              pattern="\\d*"
               placeholder="Buscar por ano"
               className="border p-2 rounded mr-2 text-xs w-full"
               value={yearInput}

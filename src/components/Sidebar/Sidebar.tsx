@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const menu = [
   { label: "Dashboard", to: "/" },
-  { label: "Filmes", to: "/filmes" },
+  { label: "List", to: "/movies" },
 ];
 
 interface SidebarProps {
@@ -13,10 +13,8 @@ interface SidebarProps {
 const Sidebar = ({ open, onClose }: SidebarProps) => {
   return (
     <>
-      {/* Backdrop mobile */}
       {open && <div className="fixed inset-0 bg-black/50 md:hidden z-30" onClick={onClose} />}
 
-      {/* Sidebar */}
       <aside
         className={`
           fixed md:static inset-y-0 left-0 z-40

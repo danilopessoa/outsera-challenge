@@ -1,4 +1,3 @@
-// src/pages/Movies/useMovies.ts
 import { useQuery } from "@tanstack/react-query";
 import { getMovies } from "../../services/movies/movies.service.ts";
 import { useCallback, useEffect, useState } from "react";
@@ -7,7 +6,7 @@ import type { PaginationData } from "../../interfaces/data-table.interface.ts";
 
 export const useMovies = () => {
   const DEFAULT_PAGE_SIZE = 15;
-  const DEFAULT_PAGE_NUMBER = 1;
+  const DEFAULT_PAGE_NUMBER = 0;
 
   const [currentPage, setCurrentPage] = useState(0);
   const [currentFilters, setCurrentFilters] = useState<Record<string, string | number>>({});
@@ -31,12 +30,11 @@ export const useMovies = () => {
   useEffect(() => {
     if (queryMovies.data) {
       setMovies(queryMovies.data.content);
-      const apiNumber = queryMovies.data.number || 1;
-      setCurrentPage(apiNumber - 1);
+      setCurrentPage(DEFAULT_PAGE_NUMBER);
       setPagination({
         totalPages: queryMovies.data.totalPages || 0,
         totalElements: queryMovies.data.totalElements || 0,
-        currentPage: apiNumber - 1,
+        currentPage: DEFAULT_PAGE_NUMBER,
         pageSize: queryMovies.data.size || DEFAULT_PAGE_SIZE,
         isFirst: queryMovies.data.first,
         isLast: queryMovies.data.last,
@@ -51,11 +49,10 @@ export const useMovies = () => {
         appliedFilters.year = Number(appliedFilters.year);
       }
 
-      // persist filters so navigation re-uses them
       setCurrentFilters(appliedFilters);
 
       const params: GetMoviesParams = {
-        page: pageIndex + 1,
+        page: pageIndex,
         size: pagination.pageSize || DEFAULT_PAGE_SIZE,
         ...appliedFilters,
       };
@@ -66,7 +63,7 @@ export const useMovies = () => {
       setPagination({
         totalPages: r.totalPages || 0,
         totalElements: r.totalElements || 0,
-        currentPage: (r.number || 1) - 1,
+        currentPage: r.number ?? 0,
         pageSize: r.size || DEFAULT_PAGE_SIZE,
         isFirst: r.first,
         isLast: r.last,

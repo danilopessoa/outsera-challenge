@@ -9,6 +9,14 @@ export default defineConfig({
   server: {
     port: 3000,
     open: "http://localhost:3000/",
+    proxy: {
+      "/api": {
+        target: "https://challenge.outsera.tech",
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, "/api"),
+      },
+    },
   },
   resolve: {
     alias: [{ find: "src", replacement: resolve(__dirname, "src") }],

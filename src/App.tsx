@@ -9,7 +9,7 @@ const Movies = React.lazy(() => import("./pages/Movies/Movies"));
 
 const routes = [
   { label: "Dashboard", to: "/", component: <Dashboard /> },
-  { label: "Filmes", to: "/filmes", component: <Movies /> },
+  { label: "Filmes", to: "/movies", component: <Movies /> },
 ];
 
 const queryClient = new QueryClient({

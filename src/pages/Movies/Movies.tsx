@@ -7,13 +7,13 @@ import type { Column } from "../../interfaces/data-table.interface.ts";
 const Movies: React.FC = () => {
   const COLUMNS: Column<Movie>[] = [
     { header: "ID", accessor: "id" },
-    { header: "Ano", accessor: "year" },
-    { header: "Título", accessor: "title" },
-    { header: "Vencedor", accessor: "winner" },
+    { header: "Year", accessor: "year" },
+    { header: "Title", accessor: "title" },
+    { header: "Winner?", accessor: "winner" },
   ];
   const KEYS_TO_FILTER: { keyName: string; placeholder: string; type: "number" | "select" | "text" }[] = [
-    { keyName: "year", placeholder: "Filtrar por ano", type: "number" },
-    { keyName: "winner", placeholder: "Vencedor", type: "select" },
+    { keyName: "year", placeholder: "Filter by year", type: "number" },
+    { keyName: "winner", placeholder: "Yes/No", type: "select" },
   ];
   const { movies, isLoading, getMoviesByFilter, pagination, nextPage, previousPage, goToPage } = useMovies();
 

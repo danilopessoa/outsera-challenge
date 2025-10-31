@@ -27,7 +27,7 @@ npm run test:ui
 ```
 File               | % Stmts | % Branch | % Funcs | % Lines
 -------------------|---------|----------|---------|--------
-All files          |   81.18 |    78.12 |   79.1  |   82.7
+All files          |   82.09 |    77.34 |   80.6  |   83.7
 ```
 
 ### Cobertura por Módulo

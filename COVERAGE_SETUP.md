@@ -12,32 +12,30 @@
 
 ### 2. **Configuração do Vitest** (`vite.config.ts`)
 
-```typescript
-coverage: {
-  provider: "v8",
-  reporter: ["text", "json", "html", "lcov"],
-  exclude: [
-    "node_modules/",
-    "src/tests/",
-    "**/*.config.{js,ts}",
-    "**/*.d.ts",
-    "**/vite-env.d.ts",
-    "src/main.tsx",
-    "src/App.tsx",
-    "**/*.test.{ts,tsx}",
-    "**/*.spec.{ts,tsx}",
-    "src/tests/test-utils.tsx",
-    "src/tests/setup.ts",
-    "src/tests/mocks/**",
-  ],
-  include: ["src/**/*.{ts,tsx}"],
-  all: true,
-  lines: 80,
-  functions: 80,
-  branches: 80,
-  statements: 80,
-}
-```
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html", "lcov"],
+      exclude: [
+        "node_modules/",
+        "src/tests/",
+        "**/*.config.{js,ts}",
+        "**/*.d.ts",
+        "**/vite-env.d.ts",
+        "src/main.tsx",
+        "src/App.tsx",
+        "**/*.test.{ts,tsx}",
+        "**/*.spec.{ts,tsx}",
+        "src/tests/test-utils.tsx",
+        "src/tests/setup.ts",
+        "src/tests/mocks/**",
+      ],
+      include: ["src/**/*.{ts,tsx}"],
+      all: true,
+      lines: 80,
+      functions: 80,
+      branches: 80,
+      statements: 80,
+    }
 
 ### 3. **Scripts Adicionados** (`package.json`)
 
@@ -68,10 +66,10 @@ coverage
 ### Cobertura Geral
 
 ```
-Statements   : 81.18%
-Branches     : 78.12%
-Functions    : 79.1%
-Lines        : 82.7%
+Statements   : 82.09%
+Branches     : 77.34%
+Functions    : 80.6%
+Lines        : 83.7%
 ```
 
 ### Componentes com 100% de Cobertura
@@ -138,12 +136,12 @@ coverage/
 
 O projeto está configurado com as seguintes metas:
 
-| Métrica    | Meta | Atual  | Status |
+| Métrica    | Méta | Atual  | Status |
 | ---------- | ---- | ------ | ------ |
-| Statements | 80%  | 81.18% | ✅     |
-| Branches   | 80%  | 78.12% | 🟡     |
-| Functions  | 80%  | 79.1%  | 🟡     |
-| Lines      | 80%  | 82.7%  | ✅     |
+| Statements | 80%  | 82.09% | ✅     |
+| Branches   | 80%  | 77.34% | 🟡     |
+| Functions  | 80%  | 80.6%  | ✅     |
+| Lines      | 80%  | 83.7%  | ✅     |
 
 ## 📈 Próximas Melhorias
 
@@ -300,7 +298,7 @@ jobs:
 A configuração de coverage está completa e funcionando!
 
 - ✅ 73 testes passando
-- ✅ Coverage em 82.7%
+- ✅ Coverage em 83.7%
 - ✅ Relatórios em múltiplos formatos
 - ✅ Documentação completa
 

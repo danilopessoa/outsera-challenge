@@ -3,6 +3,7 @@ import { DataTable } from "../../components/DataTable/DataTable";
 import { useMovies } from "./useMovies";
 import type { Movie } from "../../interfaces/movies.interface";
 import type { Column } from "../../interfaces/data-table.interface.ts";
+import { Card } from "../../components/Card/Card.tsx";
 
 const Movies: React.FC = () => {
   const COLUMNS: Column<Movie>[] = [
@@ -27,17 +28,18 @@ const Movies: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-4">Filmes</h2>
-      <DataTable
-        columns={COLUMNS}
-        data={movies}
-        keysToFilter={KEYS_TO_FILTER}
-        getDataByFilter={handleFilters}
-        pagination={pagination}
-        onPreviousPage={previousPage}
-        onPageChange={goToPage}
-        onNextPage={nextPage}
-      />
+      <Card title="List movies">
+        <DataTable
+          columns={COLUMNS}
+          data={movies}
+          keysToFilter={KEYS_TO_FILTER}
+          getDataByFilter={handleFilters}
+          pagination={pagination}
+          onPreviousPage={previousPage}
+          onPageChange={goToPage}
+          onNextPage={nextPage}
+        />
+      </Card>
     </div>
   );
 };

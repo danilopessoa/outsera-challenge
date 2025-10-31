@@ -3,7 +3,6 @@ import { DataTable } from "./DataTable";
 import type { Column } from "../../interfaces/data-table.interface";
 import { render, screen } from "@testing-library/react";
 
-// Mock data for testing
 const mockData = [
   { id: 1, name: "Item 1", value: 100 },
   { id: 2, name: "Item 2", value: 200 },

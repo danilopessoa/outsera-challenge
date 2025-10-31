@@ -43,7 +43,7 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
               type="text"
               id="yearInput"
               inputMode="numeric"
-              placeholder="Buscar por ano"
+              placeholder="Filter by year"
               className="border p-2 rounded mr-2 text-xs w-full"
               value={yearInput}
               onChange={(e) => {
@@ -55,7 +55,7 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2"
-              aria-label="Buscar por ano"
+              aria-label="Filter by year"
               onClick={() => {
                 handleSearch().catch(console.error);
               }}
@@ -67,8 +67,8 @@ export const WinnersByYears = ({ getListMoviesWinnersByYear }: WinnersByYearProp
             <DataTable
               columns={[
                 { header: "ID", accessor: "id" },
-                { header: "Ano", accessor: "year" },
-                { header: "Título", accessor: "title" },
+                { header: "Year", accessor: "year" },
+                { header: "Title", accessor: "title" },
               ]}
               data={winnersByYear}
             />

@@ -5,7 +5,6 @@ import { useDashboard } from "./useDashboard";
 import * as moviesService from "../../services/movies/movies.service";
 import { createElement, type ReactNode } from "react";
 
-// Mock do serviço de filmes
 vi.mock("../../services/movies/movies.service");
 
 describe("useDashboard", () => {
@@ -52,7 +51,6 @@ describe("useDashboard", () => {
       title: "The Adventures of Ford Fairlane",
       winner: true,
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ] as any;
 
   beforeEach(() => {
@@ -66,11 +64,9 @@ describe("useDashboard", () => {
 
     vi.clearAllMocks();
 
-    // Mock das funções do serviço
     vi.mocked(moviesService.getYearsWithMultipleWinners).mockResolvedValue(mockYearsWithMultipleWinners);
     vi.mocked(moviesService.getStudiosWithWinCount).mockResolvedValue(mockStudiosWithWinCount);
     vi.mocked(moviesService.getMaxMinWinIntervalForProducers).mockResolvedValue(mockMaxMinWinIntervalForProducers);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     vi.mocked(moviesService.getWinnersByYear).mockResolvedValue(mockWinnersByYear);
   });
 
@@ -80,26 +76,20 @@ describe("useDashboard", () => {
   it("should fetch all dashboard data on mount", async () => {
     const { result } = renderHook(() => useDashboard(), { wrapper });
 
-    // Inicialmente deve estar carregando
     expect(result.current.isLoading).toBe(true);
 
-    // Aguarda o carregamento dos dados
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    // Verifica se os dados foram carregados corretamente
     expect(result.current.yearsWithMultipleWinners).toEqual(mockYearsWithMultipleWinners);
     expect(result.current.studiosWithWinCount).toEqual(mockStudiosWithWinCount);
     expect(result.current.maxMinWinIntervalForProducers).toEqual(mockMaxMinWinIntervalForProducers);
   });
 
   it("should return default values when data is not loaded", () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
     vi.mocked(moviesService.getYearsWithMultipleWinners).mockResolvedValue(undefined as any);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
     vi.mocked(moviesService.getStudiosWithWinCount).mockResolvedValue(undefined as any);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
     vi.mocked(moviesService.getMaxMinWinIntervalForProducers).mockResolvedValue(undefined as any);
 
     const { result } = renderHook(() => useDashboard(), { wrapper });
@@ -150,10 +140,8 @@ describe("useDashboard", () => {
         title: "Battlefield Earth",
         winner: true,
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ] as any;
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     vi.mocked(moviesService.getWinnersByYear).mockResolvedValue(mockWinners2000);
 
     const { result } = renderHook(() => useDashboard(), { wrapper });

@@ -33,6 +33,7 @@ All files          |   81.18 |    78.12 |   79.1  |   82.7
 ### Cobertura por Módulo
 
 #### ✅ 100% de Cobertura
+
 - **components/Card** - 100%
 - **components/Header** - 100%
 - **components/Sidebar** - 100%
@@ -42,12 +43,14 @@ All files          |   81.18 |    78.12 |   79.1  |   82.7
 - **template** - 100%
 
 #### 🟡 Boa Cobertura (> 70%)
+
 - **pages/Movies** - 82.6%
 - **components/DataTable/FilterFields** - 77.77%
 - **components/DataTable/Pagination** - 75%
 - **services/api** - 100% (statements)
 
 #### 🔴 Necessita Melhorias
+
 - **components/DataTable/DataTable** - 53.44%
 - **interfaces** - 0%
 
@@ -101,6 +104,7 @@ start coverage/index.html  # Windows
 ## 🧪 Suítes de Testes
 
 ### Componentes (73 testes)
+
 - ✅ Card (4 testes)
 - ✅ DataTable (4 testes)
 - ✅ FilterFields (10 testes)
@@ -109,10 +113,12 @@ start coverage/index.html  # Windows
 - ✅ Skeleton (4 testes)
 
 ### Páginas (32 testes)
+
 - ✅ Dashboard (13 testes)
 - ✅ Dashboard Hook (10 testes)
 - ✅ Movies (9 testes)
 
 ### Hooks
+
 - ✅ useMovies (4 testes)
 - ✅ useDashboard (10 testes)

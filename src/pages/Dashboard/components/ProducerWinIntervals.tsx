@@ -15,10 +15,10 @@ interface ProducerWinIntervalsProps {
 }
 
 const COLUMNS: Column<ProducerInterval>[] = [
-  { header: "Produtora", accessor: "producer" },
-  { header: "Intervalo", accessor: "interval" },
-  { header: "Ano anterior", accessor: "previousWin" },
-  { header: "Ano seguinte", accessor: "followingWin" },
+  { header: "Producer", accessor: "producer" },
+  { header: "Interval", accessor: "interval" },
+  { header: "Previous Year", accessor: "previousWin" },
+  { header: "Following Year", accessor: "followingWin" },
 ];
 
 export const ProducerWinIntervals = ({ min, max }: ProducerWinIntervalsProps) => {

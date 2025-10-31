@@ -3,7 +3,6 @@ import { render, screen } from "../../tests/test-utils";
 import Movies from "./Movies";
 import * as useMoviesHook from "./useMovies";
 
-// Mock do hook useMovies
 vi.mock("./useMovies");
 
 describe("Movies", () => {
@@ -40,7 +39,7 @@ describe("Movies", () => {
 
   it("renders the page title", () => {
     render(<Movies />);
-    expect(screen.getByText("Filmes")).toBeInTheDocument();
+    expect(screen.getByText("List movies")).toBeInTheDocument();
   });
 
   it("shows loading state when isLoading is true", () => {
@@ -65,16 +64,16 @@ describe("Movies", () => {
     render(<Movies />);
 
     expect(screen.getByText("ID")).toBeInTheDocument();
-    expect(screen.getByText("Ano")).toBeInTheDocument();
-    expect(screen.getByText("Título")).toBeInTheDocument();
-    expect(screen.getByText("Vencedor")).toBeInTheDocument();
+    expect(screen.getByText("Year")).toBeInTheDocument();
+    expect(screen.getByText("Title")).toBeInTheDocument();
+    expect(screen.getByText("Winner?")).toBeInTheDocument();
   });
 
   it("renders filter fields", () => {
     render(<Movies />);
 
-    expect(screen.getByPlaceholderText("Filtrar por ano")).toBeInTheDocument();
-    expect(screen.getByRole("combobox")).toBeInTheDocument(); // select para winner
+    expect(screen.getByPlaceholderText("Filter by year")).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
   it("calls getMoviesByFilter when filters are applied", () => {
@@ -97,18 +96,15 @@ describe("Movies", () => {
 
     render(<Movies />);
 
-    // Verifica que o título ainda é renderizado
-    expect(screen.getByText("Filmes")).toBeInTheDocument();
+    expect(screen.getByText("List movies")).toBeInTheDocument();
 
-    // Verifica que não há filmes exibidos
     expect(screen.queryByText("Can't Stop the Music")).not.toBeInTheDocument();
   });
 
   it("passes correct filter configuration to DataTable", () => {
     render(<Movies />);
 
-    // Verifica se os filtros configurados estão presentes
-    const yearFilter = screen.getByPlaceholderText("Filtrar por ano");
+    const yearFilter = screen.getByPlaceholderText("Filter by year");
     expect(yearFilter).toBeInTheDocument();
     expect(yearFilter).toHaveAttribute("inputMode", "numeric");
 

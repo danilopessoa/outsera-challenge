@@ -8,7 +8,6 @@ import type {
   MaxMinWinIntervalForProducers,
 } from "../../interfaces/movies.interface";
 
-// Mock do httpClient usando vi.hoisted
 const { mockGet } = vi.hoisted(() => {
   return {
     mockGet: vi.fn(),
@@ -81,10 +80,10 @@ describe("Movies Service", () => {
     it("should fetch movies with required parameters", async () => {
       mockGet.mockResolvedValue(mockMoviesPage);
 
-      const result = await getMovies({ page: 1, size: 10 });
+      const result = await getMovies({ page: 0, size: 10 });
 
       expect(mockGet).toHaveBeenCalledWith("/movies", {
-        page: "1",
+        page: "0",
         size: "10",
       });
       expect(result).toEqual(mockMoviesPage);
@@ -93,10 +92,10 @@ describe("Movies Service", () => {
     it("should fetch movies with winner filter", async () => {
       mockGet.mockResolvedValue(mockMoviesPage);
 
-      await getMovies({ page: 1, size: 10, winner: true });
+      await getMovies({ page: 0, size: 10, winner: true });
 
       expect(mockGet).toHaveBeenCalledWith("/movies", {
-        page: "1",
+        page: "0",
         size: "10",
         winner: "true",
       });
@@ -105,10 +104,10 @@ describe("Movies Service", () => {
     it("should fetch movies with year filter", async () => {
       mockGet.mockResolvedValue(mockMoviesPage);
 
-      await getMovies({ page: 1, size: 10, year: 1980 });
+      await getMovies({ page: 0, size: 10, year: 1980 });
 
       expect(mockGet).toHaveBeenCalledWith("/movies", {
-        page: "1",
+        page: "0",
         size: "10",
         year: "1980",
       });
@@ -128,11 +127,12 @@ describe("Movies Service", () => {
     });
 
     it("should throw error if page is not an integer", async () => {
-      await expect(getMovies({ page: 1.5, size: 10 })).rejects.toThrow("`page` must be an integer >= 1");
+      await expect(getMovies({ page: 1.5, size: 10 })).rejects.toThrow("`page` must be an integer >= 0");
     });
 
-    it("should throw error if page is less than 1", async () => {
-      await expect(getMovies({ page: 0, size: 10 })).rejects.toThrow("`page` must be an integer >= 1");
+    it("should not throw when page is 0 (0-based)", async () => {
+      mockGet.mockResolvedValue(mockMoviesPage);
+      await expect(getMovies({ page: 0, size: 10 })).resolves.toBeDefined();
     });
 
     it("should throw error if size is not an integer", async () => {
@@ -140,11 +140,11 @@ describe("Movies Service", () => {
     });
 
     it("should throw error if size is less than 1", async () => {
-      await expect(getMovies({ page: 1, size: 0 })).rejects.toThrow("`size` must be an integer >= 1");
+      await expect(getMovies({ page: 0, size: 0 })).rejects.toThrow("`size` must be an integer >= 1");
     });
 
     it("should throw error if year is not an integer", async () => {
-      await expect(getMovies({ page: 1, size: 10, year: 1980.5 })).rejects.toThrow(
+      await expect(getMovies({ page: 0, size: 10, year: 1980.5 })).rejects.toThrow(
         "`year` must be an integer when provided",
       );
     });

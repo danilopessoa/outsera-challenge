@@ -12,8 +12,8 @@ interface YearsWithMultipleWinnersProps {
 }
 
 const COLUMNS: Column<YearData>[] = [
-  { header: "Ano", accessor: "year" },
-  { header: "Contagem de vitórias", accessor: "winnerCount" },
+  { header: "Year", accessor: "year" },
+  { header: "Win Count", accessor: "winnerCount" },
 ];
 
 export const YearsWithMultipleWinners = ({ years }: YearsWithMultipleWinnersProps) => {

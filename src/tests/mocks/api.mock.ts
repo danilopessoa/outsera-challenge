@@ -1,12 +1,10 @@
 import { vi } from "vitest";
 
-// Mock axios or API calls if needed
 export const mockAxiosGet = vi.fn();
 export const mockAxiosPost = vi.fn();
 export const mockAxiosPut = vi.fn();
 export const mockAxiosDelete = vi.fn();
 
-// Example mock data for movies
 export const mockMovies = {
   data: [
     {

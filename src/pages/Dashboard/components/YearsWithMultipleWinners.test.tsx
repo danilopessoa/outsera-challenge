@@ -11,15 +11,14 @@ describe("YearsWithMultipleWinners component", () => {
   it("renders card title and table headers", () => {
     render(<YearsWithMultipleWinners years={yearsMock} />);
 
-    expect(screen.getByText("Liste os anos com mais vencedores")).toBeInTheDocument();
-    expect(screen.getByText("Ano")).toBeInTheDocument();
-    expect(screen.getByText("Contagem de vitórias")).toBeInTheDocument();
+    expect(screen.getByText("List years with multiple winners")).toBeInTheDocument();
+    expect(screen.getByText("Year")).toBeInTheDocument();
+    expect(screen.getByText("Win Count")).toBeInTheDocument();
   });
 
   it("renders rows for provided years data", () => {
     render(<YearsWithMultipleWinners years={yearsMock} />);
 
-    // Check that year and count values are rendered
     expect(screen.getByText("2000")).toBeInTheDocument();
     expect(screen.getByText("3")).toBeInTheDocument();
     expect(screen.getByText("1999")).toBeInTheDocument();
@@ -29,6 +28,6 @@ describe("YearsWithMultipleWinners component", () => {
   it("shows empty state when no years", () => {
     render(<YearsWithMultipleWinners years={[]} />);
 
-    expect(screen.getByText("Nenhum dado encontrado.")).toBeInTheDocument();
+    expect(screen.getByText("No data found.")).toBeInTheDocument();
   });
 });

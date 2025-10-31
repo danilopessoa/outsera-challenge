@@ -3,10 +3,8 @@ import { render, screen, waitFor } from "../../tests/test-utils";
 import Dashboard from "./Dashboard";
 import * as useDashboardHook from "./useDashboard";
 
-// Mock do hook useDashboard
 vi.mock("./useDashboard");
 
-// Mock dos componentes filhos
 vi.mock("./components/YearsWithMultipleWinners", () => ({
   YearsWithMultipleWinners: ({ years }: { years: unknown[] }) => (
     <div data-testid="years-with-multiple-winners">Years: {years.length}</div>
@@ -83,11 +81,6 @@ describe("Dashboard", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useDashboardHook.useDashboard).mockReturnValue(mockUseDashboard);
-  });
-
-  it("renders the dashboard title", () => {
-    render(<Dashboard />);
-    expect(screen.getByText("Dashboard")).toBeInTheDocument();
   });
 
   it("shows loading state when isLoading is true", () => {

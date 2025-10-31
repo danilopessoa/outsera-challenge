@@ -10,16 +10,15 @@ describe("ProducerWinIntervals component", () => {
   it("renders card title and both tables titles", () => {
     render(<ProducerWinIntervals min={minMock} max={maxMock} />);
 
-    expect(screen.getByText("Produtores com maior intervalo entre vitórias")).toBeInTheDocument();
-    expect(screen.getByText("Máximo")).toBeInTheDocument();
-    expect(screen.getByText("Mínimo")).toBeInTheDocument();
+    expect(screen.getByText("Producers with longest and shortest interval between wins")).toBeInTheDocument();
+    expect(screen.getByText("Maximum")).toBeInTheDocument();
+    expect(screen.getByText("Minimum")).toBeInTheDocument();
   });
 
   it("renders rows for min and max data", () => {
     render(<ProducerWinIntervals min={minMock} max={maxMock} />);
 
-    // Get the Máximo table and assert its contents
-    const maxHeading = screen.getByText("Máximo");
+    const maxHeading = screen.getByText("Maximum");
     const maxTable = maxHeading.nextElementSibling as HTMLElement;
     const maxWithin = within(maxTable);
 
@@ -28,8 +27,7 @@ describe("ProducerWinIntervals component", () => {
     expect(maxWithin.getByText("1990")).toBeInTheDocument();
     expect(maxWithin.getByText("2000")).toBeInTheDocument();
 
-    // Get the Mínimo table and assert its contents
-    const minHeading = screen.getByText("Mínimo");
+    const minHeading = screen.getByText("Minimum");
     const minTable = minHeading.nextElementSibling as HTMLElement;
     const minWithin = within(minTable);
 
@@ -42,7 +40,6 @@ describe("ProducerWinIntervals component", () => {
   it("shows empty state when arrays are empty", () => {
     render(<ProducerWinIntervals min={[]} max={[]} />);
 
-    // The tables should render and show the empty message
-    expect(screen.getAllByText("Nenhum dado encontrado.").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText("No data found.").length).toBeGreaterThanOrEqual(2);
   });
 });

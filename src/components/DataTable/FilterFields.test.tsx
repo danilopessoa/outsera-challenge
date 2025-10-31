@@ -76,12 +76,20 @@ describe("FilterField", () => {
 
   describe("select field", () => {
     it("renders select with correct options", () => {
-      render(<FilterField id="test-select" fieldType="select" onChange={mockOnChange} onClear={mockOnClear} />);
+      render(
+        <FilterField
+          id="test-select"
+          fieldType="select"
+          onChange={mockOnChange}
+          onClear={mockOnClear}
+          placeholder={"Yes/No"}
+        />,
+      );
 
       const select = screen.getByRole("combobox");
       expect(select).toBeInTheDocument();
 
-      expect(screen.getByText("Escolha uma opção")).toBeInTheDocument();
+      expect(screen.getByText("Yes/No")).toBeInTheDocument();
       expect(screen.getByText("Yes")).toBeInTheDocument();
       expect(screen.getByText("No")).toBeInTheDocument();
     });

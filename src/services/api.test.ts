@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { httpClient } from "./api";
 
-// Mock do axios usando vi.hoisted
 const mockAxiosCreate = vi.hoisted(() => vi.fn());
 
 vi.mock("axios", () => ({
@@ -10,7 +9,6 @@ vi.mock("axios", () => ({
   },
 }));
 
-// standalone mock function to avoid unbound-method and any typing
 const mockGet = vi.fn();
 const mockAxiosInstance = {
   get: mockGet,

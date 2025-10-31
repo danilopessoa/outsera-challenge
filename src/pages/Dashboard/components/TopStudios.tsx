@@ -12,15 +12,12 @@ interface TopStudiosProps {
 }
 
 const COLUMNS: Column<Studio>[] = [
-  { header: "Nome", accessor: "name" },
-  { header: "Contagem de vitórias", accessor: "winCount" },
+  { header: "Name", accessor: "name" },
+  { header: "Win Count", accessor: "winCount" },
 ];
 
 export const TopStudios = ({ studios }: TopStudiosProps) => {
   return (
-    <Card
-      title="Top 3 studios with winners"
-      children={<DataTable columns={COLUMNS} data={studios?.slice(0, 3)} />}
-    />
+    <Card title="Top 3 studios with winners" children={<DataTable columns={COLUMNS} data={studios?.slice(0, 3)} />} />
   );
 };

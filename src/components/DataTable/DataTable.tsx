@@ -108,7 +108,7 @@ export function DataTable<T>({
           ) : (
             <tr>
               <td className="px-4 py-4 text-center text-gray-500" colSpan={columns.length}>
-                Nenhum dado encontrado.
+                No data found.
               </td>
             </tr>
           )}

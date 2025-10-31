@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "../tests/test-utils";
 import { Template } from "./Template";
 
-// Mock dos componentes Header e Sidebar
 vi.mock("../components/Header/Header", () => ({
   Header: ({ onMenuClick }: { onMenuClick: () => void }) => (
     <header data-testid="header">
@@ -19,7 +18,6 @@ vi.mock("../components/Sidebar/Sidebar", () => ({
   ),
 }));
 
-// Mock do Outlet do react-router-dom
 vi.mock("react-router-dom", async () => {
   const actual = await vi.importActual("react-router-dom");
   return {
@@ -64,11 +62,9 @@ describe("Template", () => {
     const closeButton = screen.getByText("Close");
     const sidebar = screen.getByTestId("sidebar");
 
-    // Open sidebar
     fireEvent.click(menuButton);
     expect(sidebar).toHaveAttribute("data-open", "true");
 
-    // Close sidebar
     fireEvent.click(closeButton);
     expect(sidebar).toHaveAttribute("data-open", "false");
   });
@@ -80,18 +76,14 @@ describe("Template", () => {
     const closeButton = screen.getByText("Close");
     const sidebar = screen.getByTestId("sidebar");
 
-    // Initially closed
     expect(sidebar).toHaveAttribute("data-open", "false");
 
-    // Open
     fireEvent.click(menuButton);
     expect(sidebar).toHaveAttribute("data-open", "true");
 
-    // Close
     fireEvent.click(closeButton);
     expect(sidebar).toHaveAttribute("data-open", "false");
 
-    // Open again
     fireEvent.click(menuButton);
     expect(sidebar).toHaveAttribute("data-open", "true");
   });
@@ -120,4 +112,3 @@ describe("Template", () => {
     expect(contentWrapper).toHaveClass("flex", "flex-1", "overflow-hidden", "w-full");
   });
 });
-

@@ -7,7 +7,7 @@ describe("Sidebar", () => {
     render(<Sidebar open={true} onClose={vi.fn()} />);
 
     expect(screen.getByText("Dashboard")).toBeInTheDocument();
-    expect(screen.getByText("Filmes")).toBeInTheDocument();
+    expect(screen.getByText("List")).toBeInTheDocument();
   });
 
   it("renders Dashboard link with correct href", () => {
@@ -20,8 +20,8 @@ describe("Sidebar", () => {
   it("renders Filmes link with correct href", () => {
     render(<Sidebar open={true} onClose={vi.fn()} />);
 
-    const filmesLink = screen.getByRole("link", { name: "Filmes" });
-    expect(filmesLink).toHaveAttribute("href", "/filmes");
+    const filmesLink = screen.getByRole("link", { name: "List" });
+    expect(filmesLink).toHaveAttribute("href", "/movies");
   });
 
   it("applies correct class when sidebar is open", () => {
@@ -79,7 +79,7 @@ describe("Sidebar", () => {
     render(<Sidebar open={true} onClose={onCloseMock} />);
 
     const dashboardLink = screen.getByRole("link", { name: "Dashboard" });
-    const filmesLink = screen.getByRole("link", { name: "Filmes" });
+    const filmesLink = screen.getByRole("link", { name: "List" });
 
     fireEvent.click(dashboardLink);
     fireEvent.click(filmesLink);

@@ -166,7 +166,6 @@ describe("useMovies Hook", () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    // Test filtering
     await act(async () => {
       await result.current.getMoviesByFilter({ year: "1990" });
     });

@@ -27,7 +27,7 @@ npm run test:ui
 ```
 File               | % Stmts | % Branch | % Funcs | % Lines
 -------------------|---------|----------|---------|--------
-All files          |   57.42 |    57.03 |   52.23 |   57.83
+All files          |   81.18 |    78.12 |   79.1  |   82.7
 ```
 
 ### Cobertura por Módulo
@@ -38,30 +38,29 @@ All files          |   57.42 |    57.03 |   52.23 |   57.83
 - **components/Sidebar** - 100%
 - **components/Skeleton** - 100%
 - **pages/Dashboard** - 100%
+- **services/movies** - 100%
+- **template** - 100%
 
 #### 🟡 Boa Cobertura (> 70%)
-- **pages/Movies** - 82.60%
+- **pages/Movies** - 82.6%
 - **components/DataTable/FilterFields** - 77.77%
-- **components/DataTable/Pagination** - 73.33%
-- **services/api** - 71.42%
+- **components/DataTable/Pagination** - 75%
+- **services/api** - 100% (statements)
 
 #### 🔴 Necessita Melhorias
-- **components/DataTable/DataTable** - 38.23%
-- **services/movies** - 28%
-- **pages/Dashboard/components** - 0% (componentes mockados nos testes)
-- **template** - 0%
+- **components/DataTable/DataTable** - 53.44%
+- **interfaces** - 0%
 
 ## 🎯 Metas de Cobertura
 
 O projeto está configurado com as seguintes metas mínimas no `vite.config.ts`:
 
-```typescript
-coverage: {
-  lines: 80,
-  functions: 80,
-  branches: 80,
-  statements: 80,
-}
+```text
+coverage:
+  lines: 80
+  functions: 80
+  branches: 80
+  statements: 80
 ```
 
 ## 📁 Arquivos Excluídos
@@ -117,27 +116,3 @@ start coverage/index.html  # Windows
 ### Hooks
 - ✅ useMovies (4 testes)
 - ✅ useDashboard (10 testes)
-
-## 🚀 Próximos Passos para Melhorar Cobertura
-
-1. **DataTable Component** (38% → 80%)
-   - Adicionar testes para paginação
-   - Testar ordenação de colunas
-   - Testar filtros combinados
-
-2. **Movies Service** (28% → 80%)
-   - Testar todos os endpoints da API
-   - Testar tratamento de erros
-   - Testar parâmetros de query
-
-3. **Dashboard Components** (0% → 80%)
-   - Criar testes reais para ProducerWinIntervals
-   - Criar testes reais para TopStudios
-   - Criar testes reais para WinnersByYear
-   - Criar testes reais para YearsWithMultipleWinners
-
-4. **Template Component** (0% → 80%)
-   - Adicionar testes de layout
-   - Testar navegação
-
-
